@@ -1,0 +1,75 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link href="projct.css" rel="stylesheet">
+</head>
+<body>
+<header>
+  <img src="pnu.jpg" alt="Website Logo" width="100" />
+  <h1>Sign Up</h1>
+</header>
+<nav>
+  <ul>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/Home.html?_ijt=5bcudb3a5un3ulsfvjjseqdb5p&_ij_reload=RELOAD_ON_SAVE">Home</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/AboutUs.html?_ijt=3lkehr4l772sq4b03fli77s11n&_ij_reload=RELOAD_ON_SAVE">About Us</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/Service.html?_ijt=n0h753l72spuf7eghp6fh8qsek&_ij_reload=RELOAD_ON_SAVE">Services</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/Games.html?_ijt=ih1k3n1juktvvtd35jdnm5ciq8&_ij_reload=RELOAD_ON_SAVE">Games</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/singIn.html?_ijt=s7tqpr9bsaev77jcqqbf2217d7&_ij_reload=RELOAD_ON_SAVE">Sign In</a></li>
+  </ul>
+</nav>
+<main class="content">
+  <form action="#" method="post">
+    <fieldset>
+      <legend>Personal Information</legend>
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="your name"><br>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="name@domain.com" required="required"><br>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required="required"><br>
+
+    <label for="id3">Age:</label>
+    <input id="id3" name="Age:" type="number" min="8" max="45"/><br>
+
+<br>
+<label for="id4">Gender:</label>
+    <select id="id4" name="Choose">
+      <option value="female">female</option>
+      <option value="male">male</option>
+    </select>
+      <br><br>
+      <input type="submit" value="Sign Up">
+
+      <input type="Reset" name="Reset" value="Reset"></label>
+
+      <label for="colorPicker">Choose a color:</label>
+      <input type="color" id="colorPicker" name="colorPicker">
+      <div id="colorBox" style="width:20px; height:20px; border:1px solid #000; margin-top:20px;"></div>
+    </fieldset>
+  </form>
+</main>
+<footer>
+  <p>&copy; 2024 My Website. All rights reserved.</p>
+</footer>
+<script>
+    function checkDefaultValue(event) {
+       event.preventDefault();
+       var input = document.getElementById("name");
+       if (input.value === "your name") {
+           alert("The default value has not changed");
+       } else {
+           alert("The default value has changed");
+       }
+  }
+   document.getElementById("colorPicker").addEventListener("change", function() {
+        document.getElementById("colorBox").style.backgroundColor = this.value;
+    });
+
+</script>
+</body>
+</html>

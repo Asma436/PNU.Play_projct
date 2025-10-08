@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game4</title>
+  <link href="projct.css" rel="stylesheet">
+</head>
+<body id="B1" onload="startGame()">
+<header id="H4">
+  <img src="pnu.jpg" alt="Website Logo" width="100">
+  <h1>Snake Game</h1>
+</header>
+<nav>
+  <ul>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/AboutUs.html?_ijt=3lkehr4l772sq4b03fli77s11n&_ij_reload=RELOAD_ON_SAVE">About Us</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/Service.html?_ijt=n0h753l72spuf7eghp6fh8qsek&_ij_reload=RELOAD_ON_SAVE">Services</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/Games.html?_ijt=ih1k3n1juktvvtd35jdnm5ciq8&_ij_reload=RELOAD_ON_SAVE">Games</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/singIn.html?_ijt=s7tqpr9bsaev77jcqqbf2217d7&_ij_reload=RELOAD_ON_SAVE">Sign In</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/SingUp.html?_ijt=3qfjq9rck83js43m03dsni4jtb&_ij_reload=RELOAD_ON_SAVE">Sign Up</a></li>
+  </ul>
+</nav>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+ <canvas id="gameCanvas" width="400" height="400">
+   <button id="restartButton">Restart Game</button>
+<script>
+  const canvas = document.getElementById('gameCanvas');
+ const ctx = canvas.getContext('2d');
+ const restartButton = document.getElementById('restartButton');
+
+ const box = 20;
+ const canvasSize = 400;
+ let snake, food, direction, score, game;
+
+ function startGame() {
+     snake = [{ x: box * 2, y: box * 2 }];
+     food = { x: Math.floor(Math.random() * canvasSize / box) * box, y: Math.floor(Math.random() * canvasSize / box) * box };
+     direction = 'RIGHT';
+     score = 0;
+     if (game) {
+         clearInterval(game);
+     }
+     game = setInterval(draw, 100);
+ }
+
+ document.addEventListener('keydown', directionControl);
+ restartButton.addEventListener('click', startGame);
+
+ function directionControl(event) {
+     if (event.keyCode === 37 && direction !== 'RIGHT') {
+         direction = 'LEFT';
+     } else if (event.keyCode === 38 && direction !== 'DOWN') {
+         direction = 'UP';
+     } else if (event.keyCode === 39 && direction !== 'LEFT') {
+         direction = 'RIGHT';
+     } else if (event.keyCode === 40 && direction !== 'UP') {
+         direction = 'DOWN';
+     }
+ }
+
+ function draw() {
+     ctx.clearRect(0, 0, canvasSize, canvasSize);
+
+     for (let i = 0; i < snake.length; i++) {
+         ctx.fillStyle = (i === 0) ? 'green' : 'white';
+         ctx.fillRect(snake[i].x, snake[i].y, box, box);
+         ctx.strokeStyle = 'red';
+         ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+     }
+
+     ctx.fillStyle = 'red';
+     ctx.fillRect(food.x, food.y, box, box);
+
+     let snakeX = snake[0].x;
+     let snakeY = snake[0].y;
+
+     if (direction === 'LEFT') snakeX -= box;
+     if (direction === 'UP') snakeY -= box;
+     if (direction === 'RIGHT') snakeX += box;
+     if (direction === 'DOWN') snakeY += box;
+
+     if (snakeX === food.x && snakeY === food.y) {
+         score++;
+         food = {
+             x: Math.floor(Math.random() * canvasSize / box) * box,
+             y: Math.floor(Math.random() * canvasSize / box) * box
+         };
+     } else {
+         snake.pop();
+     }
+
+     let newHead = { x: snakeX, y: snakeY };
+
+     if (snakeX < 0 || snakeY < 0 || snakeX >= canvasSize || snakeY >= canvasSize || collision(newHead, snake)) {
+         clearInterval(game);
+         alert('Game Over');
+     }
+
+     snake.unshift(newHead);
+
+     ctx.fillStyle = 'white';
+     ctx.font = '45px Arial';
+     ctx.fillText(score, 10, 45);
+ }
+
+ function collision(head, array) {
+     for (let i = 0; i < array.length; i++) {
+         if (head.x === array[i].x && head.y === array[i].y) {
+             return true;
+         }
+     }
+     return false;
+ }
+
+ startGame();
+
+</script>
+ </body>
+</html>

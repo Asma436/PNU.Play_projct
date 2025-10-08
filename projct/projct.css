@@ -1,0 +1,206 @@
+        /*  Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* H and F */
+        header, footer {
+            background-color:#00357B;
+            color: #ffffff;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        /* Nav */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+            background-color: #007bff;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        nav ul li a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Main  */
+        main {
+            padding: 20px;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .content h2, .content p, .content ul {
+            margin-bottom: 20px;
+        }
+
+        /* Forms */
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        form fieldset {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        form legend {
+            font-weight: bold;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+         form input[type="password"],
+         form input[type="radio"],
+         form input[type="submit"] {
+            margin-bottom: 10px;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+            }
+                #Game1 {
+                width: 100px;
+                height:50px;
+                }
+                #Game2 {
+                width: 100px;
+                height:50px;
+                }
+                #Game3 {
+                width: 100px;
+                height:50px;
+            }
+
+         .game-image {
+                     width: 200px;
+                     height: 200px;
+                     border: 3px solid #000;
+                     margin: 20px;
+                 }
+
+
+        /*game1*/
+        body #B1{ display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f0f0; }
+        .board { display: grid; grid-template-columns: repeat(3, 100px); grid-template-rows: repeat(3, 100px); gap: 5px; }
+        .cell { width: 100px; height: 100px; display: flex; justify-content: center;align-items: center; background-color: block; font-size: 3em; cursor: pointer; border: 2px solid #000; }
+
+        /*game2*/
+
+        h1 #h11 {
+            margin-bottom: 20px;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-template-rows: repeat(4, 100px);
+            gap: 10px;
+        }
+
+        .card {
+            width: 100px;
+            height: 100px;
+            background-color: #007bff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            color: #007bff;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .card.flipped {
+            background-color: #fff;
+            color: #007bff;
+        }
+
+        /* game3 */
+        body#B3 {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin: 10px;
+        }
+
+        #gameCanvas {
+            border: 2px solid white;
+            background-color: black;
+        }
+
+        /* game4 */
+        button { padding: 10px 20px;
+         font-size: 1em;
+          cursor: pointer;
+          background-color: #007bff;
+          color: white;
+           border: none;
+            border-radius: 5px;
+            margin-top: 20px; }
+        button:hover {
+        background-color: #0056b3; }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            border: 1px solid #000;
+        }
+

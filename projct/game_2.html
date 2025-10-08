@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game2</title>
+  <link href="projct.css" rel="stylesheet">
+</head>
+<body id="B2" onload="startGame()">
+<header id="H2">
+  <img src="pnu.jpg" alt="Website Logo" width="100">
+  <h1>Welcome to PNU Game</h1>
+</header>
+<nav>
+  <ul>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/AboutUs.html?_ijt=3lkehr4l772sq4b03fli77s11n&_ij_reload=RELOAD_ON_SAVE">About Us</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/Service.html?_ijt=n0h753l72spuf7eghp6fh8qsek&_ij_reload=RELOAD_ON_SAVE">Services</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/Games.html?_ijt=ih1k3n1juktvvtd35jdnm5ciq8&_ij_reload=RELOAD_ON_SAVE">Games</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/singIn.html?_ijt=s7tqpr9bsaev77jcqqbf2217d7&_ij_reload=RELOAD_ON_SAVE">Sign In</a></li>
+    <li><a href="http://localhost:63342/Asma.CSS.tray/projct/SingUp.html?_ijt=3qfjq9rck83js43m03dsni4jtb&_ij_reload=RELOAD_ON_SAVE">Sign Up</a></li>
+  </ul>
+</nav>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<h1 id="h11">Memory Game</h1>
+<div class="game-board" id="gameBoard"></div>
+<script>
+  const gameBoard = document.getElementById('gameBoard');
+const cardValues = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H'];
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+
+function createBoard() {
+    shuffle(cardValues);
+    cardValues.forEach(value => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.dataset.value = value;
+        card.innerHTML = value;
+        card.addEventListener('click', flipCard);
+        gameBoard.appendChild(card);
+    });
+}
+
+function flipCard() {
+    if (lockBoard) return;
+    this.classList.add('flipped');
+
+    if (!firstCard) {
+        firstCard = this;
+        return;
+    }
+
+    secondCard = this;
+    checkForMatch();
+}
+
+function checkForMatch() {
+    let isMatch = firstCard.dataset.value === secondCard.dataset.value;
+    isMatch ? disableCards() : unflipCards();
+}
+
+function disableCards() {
+    firstCard.removeEventListener('click', flipCard);
+    secondCard.removeEventListener('click', flipCard);
+    resetBoard();
+}
+
+function unflipCards() {
+    lockBoard = true;
+    setTimeout(() => {
+        firstCard.classList.remove('flipped');
+        secondCard.classList.remove('flipped');
+        resetBoard();
+    }, 1000);
+}
+
+function resetBoard() {
+    [firstCard, secondCard, lockBoard] = [null, null, false];
+}
+
+function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+}
+
+createBoard();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game1</title>
+    <link href="projct.css" rel="stylesheet">
+</head>
+<body id="B1" onload="startGame()">
+<header id="H1">
+    <img src="pnu.jpg" alt="Website Logo" width="100">
+    <h1>X-O</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="http://localhost:63342/Asma.CSS.tray/projct/AboutUs.html?_ijt=r9prkk2i3ctt4947rjj2hhn4u3&_ij_reload=RELOAD_ON_SAVE">About Us</a></li>
+        <li><a href="http://localhost:63342/Asma.CSS.tray/projct/Service.html?_ijt=n0h753l72spuf7eghp6fh8qsek&_ij_reload=RELOAD_ON_SAVE">Services</a></li>
+        <li><a href="http://localhost:63342/Asma.CSS.tray/projct/Games.html?_ijt=ih1k3n1juktvvtd35jdnm5ciq8&_ij_reload=RELOAD_ON_SAVE">Games</a></li>
+        <li><a href="http://localhost:63342/Asma.CSS.tray/projct/singIn.html?_ijt=s7tqpr9bsaev77jcqqbf2217d7&_ij_reload=RELOAD_ON_SAVE">Sign In</a></li>
+        <li><a href="http://localhost:63342/Asma.CSS.tray/projct/SingUp.html?_ijt=3qfjq9rck83js43m03dsni4jtb&_ij_reload=RELOAD_ON_SAVE">Sign Up</a></li>
+    </ul>
+</nav>
+<br> <br>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<div class="board" id="board">
+    <div class="cell" id="cell1"></div>
+    <div class="cell" id="cell2"></div>
+    <div class="cell" id="cell3"></div>
+    <div class="cell" id="cell4"></div>
+    <div class="cell" id="cell5"></div>
+    <div class="cell" id="cell6"></div>
+    <div class="cell" id="cell7"></div>
+    <div class="cell" id="cell8"></div>
+    <div class="cell" id="cell9"></div>
+</div>
+
+<script>
+    const board = document.getElementById('board');
+    let currentPlayer = 'X';
+    const cells = document.querySelectorAll('.cell');
+
+    cells.forEach(cell => {
+        cell.addEventListener('click', handleCellClick);
+    });
+
+    function handleCellClick(event) {
+        const cell = event.target;
+        if (cell.textContent === '') {
+            cell.textContent = currentPlayer;
+            if (checkWin()) {
+                setTimeout(() => {
+                    alert(currentPlayer + ' wins!');
+                    resetBoard();
+                }, 100);
+            } else if (isDraw()) {
+                setTimeout(() => {
+                    alert('Draw!');
+                    resetBoard();
+                }, 100);
+            } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            }
+        }
+    }
+
+    function checkWin() {
+        const winPatterns = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+
+        return winPatterns.some(pattern => {
+            return pattern.every(index => {
+                return cells[index].textContent === currentPlayer;
+            });
+        });
+    }
+
+    function isDraw() {
+        return [...cells].every(cell => {
+            return cell.textContent !== '';
+        });
+    }
+
+    function resetBoard() {
+        cells.forEach(cell => {
+            cell.textContent = '';
+        });
+        currentPlayer = 'X';
+    }
+</script>
+</body>
+</html>
+

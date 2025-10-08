@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games3</title>
+    <link href="projct.css" rel="stylesheet">
+</head>
+<body id="B3" onload="startGame()">
+<header id="H1">
+    <img src="pnu.jpg" alt="Website Logo" width="100">
+    <h1>Star</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="http://localhost:63342/Asma.CSS.tray/projct/AboutUs.html?_ijt=3lkehr4l772sq4b03fli77s11n&_ij_reload=RELOAD_ON_SAVE">About Us</a></li>
+        <li><a href="http://localhost:63342/Asma.CSS.tray/projct/Service.html?_ijt=n0h753l72spuf7eghp6fh8qsek&_ij_reload=RELOAD_ON_SAVE">Services</a></li>
+        <li><a href="http://localhost:63342/Asma.CSS.tray/projct/Games.html?_ijt=ih1k3n1juktvvtd35jdnm5ciq8&_ij_reload=RELOAD_ON_SAVE">Games</a></li>
+        <li><a href="http://localhost:63342/Asma.CSS.tray/projct/singIn.html?_ijt=s7tqpr9bsaev77jcqqbf2217d7&_ij_reload=RELOAD_ON_SAVE">Sign In</a></li>
+        <li><a href="http://localhost:63342/Asma.CSS.tray/projct/SingUp.html?_ijt=3qfjq9rck83js43m03dsni4jtb&_ij_reload=RELOAD_ON_SAVE">Sign Up</a></li>
+    </ul>
+</nav>
+<main>
+    <section>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+    </section>
+</main>
+<script>
+    const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = 800;
+canvas.height = 600;
+
+let player = { x: 375, y: 550, width: 50, height: 10, color: 'white', speed: 15 };
+let stars = [];
+let score = 0;
+
+function createStar() {
+    const x = Math.random() * (canvas.width - 10);
+    stars.push({ x, y: 0, size: 10, speed: 2 + Math.random() * 3 });
+}
+
+function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // رسم اللاعب
+    ctx.fillStyle = player.color;
+    ctx.fillRect(player.x, player.y, player.width, player.height);
+
+    // تحديث ورسم النجوم
+    stars.forEach((star, index) => {
+        star.y += star.speed;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'yellow';
+        ctx.fill();
+
+        // التحقق من التقاط النجم
+        if (
+            star.y + star.size > player.y &&
+            star.x > player.x &&
+            star.x < player.x + player.width
+        ) {
+            stars.splice(index, 1);
+            score++;
+        }
+
+        // إزالة النجوم التي خرجت من الشاشة
+        if (star.y > canvas.height) {
+            stars.splice(index, 1);
+        }
+    });
+
+    // عرض النتيجة
+    ctx.fillStyle = 'black';
+    ctx.font = '20px Arial';
+    ctx.fillText(`Score: ${score}`, 10, 30);
+
+    requestAnimationFrame(update);
+}
+
+function movePlayer(event) {
+    if (event.key === 'ArrowLeft' && player.x > 0) {
+        player.x -= player.speed;
+    } else if (event.key === 'ArrowRight' && player.x + player.width < canvas.width) {
+        player.x += player.speed;
+    }
+}
+
+document.addEventListener('keydown', movePlayer);
+setInterval(createStar, 1000);
+update();
+</script>
+</body>
+</html>
